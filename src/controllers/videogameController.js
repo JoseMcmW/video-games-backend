@@ -13,7 +13,7 @@ const videogameController = async (req, res) => {
 const detailGameController = async (req, res) => {
   try {
     const { id } = req.params
-    const detailgames = await detailgamesModule(id)
+    const detailGame = await detailGameModule(id)
     res.status(200).send(detailgames)
   } catch (error) {
     res.status(error.status || 500).send({ "error": error.message })
