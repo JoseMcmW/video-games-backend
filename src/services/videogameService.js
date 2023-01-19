@@ -1,10 +1,10 @@
 const axios = require("axios")
 require('dotenv').config();
-const { API_KEY } = process.env
+const { API_KEY, BASE_URL } = process.env
 
 const videogameService = async () => {
   try {
-    const url = `https://api.rawg.io/api/games?key=${API_KEY}`
+    const url = `${BASE_URL}/games?key=${API_KEY}`
     const { data: videogames } = await axios.get(url);
     return videogames;
   } catch (error) {
@@ -12,14 +12,14 @@ const videogameService = async () => {
   }
 }
 
-const detailgameService = async (id) => {
+const detailGameService = async (id) => {
   try {
-    const url = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`
-    const detailgames = await axios.get(url);
-    return detailgames.data;
+    const url = `${BASE_URL}/games/${id}?key=${API_KEY}`
+    const detailGame = await axios.get(url);
+    return detailGame.data;
   } catch (error) {
     throw error;
   }
 }
 
-module.exports = { videogameService, detailgameService }
+module.exports = { videogameService, detailGameService }

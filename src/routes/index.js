@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { videogameController, detailgameController } = require("../controllers/videogameController")
+const { videogameController, detailGameController } = require("../controllers/videogameController")
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -10,7 +10,7 @@ const router = Router();
 // Ejemplo: router.get('/auth', authRouter);
 
 router.get("/videogames", videogameController)
-router.get("/detailgames/:id", detailgameController)
+router.get("/detail-game/:id", detailGameController)
 
 
 module.exports = router;
