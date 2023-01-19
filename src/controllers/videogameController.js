@@ -1,5 +1,5 @@
 "use strict";
-const { videogameModule, detailgamesModule } = require("../modules/videogameModule")
+const { videogameModule, detailGameModule } = require("../modules/videogameModule")
 
 const videogameController = async (req, res) => {
   try {
