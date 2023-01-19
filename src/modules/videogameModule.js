@@ -1,8 +1,7 @@
-const videogameService = require("../services/videogameService");
+const { videogameService, detailgameService } = require("../services/videogameService");
 
 const videogameModule = async () => {
   try {
-    console.log("LLEGUÉ AL MODULE");
     const videogames = await videogameService()
     return videogames;
   } catch (error) {
@@ -10,4 +9,13 @@ const videogameModule = async () => {
   }
 }
 
-module.exports = videogameModule
+const detailgamesModule = async (id) => {
+  try {
+    const detailgames = await detailgameService(id)
+    return detailgames;
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = { videogameModule, detailgamesModule }
