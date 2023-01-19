@@ -10,7 +10,7 @@ const videogameController = async (req, res) => {
 	}
 };
 
-const detailgameController = async (req, res) => {
+const detailGameController = async (req, res) => {
   try {
     const { id } = req.params
     const detailgames = await detailgamesModule(id)
