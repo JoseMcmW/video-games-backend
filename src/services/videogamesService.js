@@ -2,7 +2,7 @@ const axios = require("axios")
 require('dotenv').config();
 const { API_KEY, BASE_URL } = process.env
 
-const videogameService = async () => {
+const videogamesService = async () => {
   try {
     const url = `${BASE_URL}/games?key=${API_KEY}`
     const { data: videogames } = await axios.get(url);
@@ -22,4 +22,4 @@ const detailGameService = async (id) => {
   }
 }
 
-module.exports = { videogameService, detailGameService }
+module.exports = { videogamesService, detailGameService }
