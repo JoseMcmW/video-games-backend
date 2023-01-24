@@ -1,9 +1,9 @@
 "use strict";
-const { videogameModule, detailGameModule } = require("../modules/videogameModule")
+const { videogamesModule, detailGameModule } = require("../modules/videogamesModule")
 
-const videogameController = async (req, res) => {
+const videogamesController = async (req, res) => {
   try {
-		const videogames = await videogameModule()
+		const videogames = await videogamesModule()
     res.status(200).send(videogames);
   } catch (error) {
 		res.status(error.status || 500).send({ "error": error.message })
@@ -20,4 +20,4 @@ const detailGameController = async (req, res) => {
   }
 }
 
-module.exports = { videogameController, detailGameController };
+module.exports = { videogamesController, detailGameController };

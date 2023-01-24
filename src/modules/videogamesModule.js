@@ -1,8 +1,8 @@
-const { videogameService, detailGameService } = require("../services/videogameService");
+const { videogamesService, detailGameService } = require("../services/videogamesService");
 
-const videogameModule = async () => {
+const videogamesModule = async () => {
   try {
-    const videogames = await videogameService();
+    const videogames = await videogamesService();
     const allVideogames = videogames.results.map(v => {
       return {
         id: v.id,
@@ -58,4 +58,4 @@ const detailGameModule = async (id) => {
   }
 }
 
-module.exports = { videogameModule, detailGameModule }
+module.exports = { videogamesModule, detailGameModule }
