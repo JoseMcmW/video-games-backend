@@ -1,6 +1,6 @@
-"use strict"
+"use strict";
 
-const { genresService } = require("../services/genresService");
+const { genresService, detailsGenreService } = require("../services/genresService");
 
 const genresModule = async () => {
   try {
@@ -26,4 +26,20 @@ const genresModule = async () => {
   }
 };
 
-module.exports = { genresModule };
+const detailsGenreModule = async (id) => {
+  try {
+    const detailsGenre = await detailsGenreService(id);
+    const detailsGenreResponse = {
+      id: detailsGenre.id,
+      name: detailsGenre.name,
+      games: detailsGenre.games_count,
+      image: detailsGenre.image_background,
+      description: detailsGenre.description,
+    };
+    return detailsGenreResponse;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { genresModule, detailsGenreModule };
