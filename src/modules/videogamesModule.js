@@ -1,4 +1,5 @@
 const { videogamesService, detailGameService } = require("../services/videogamesService");
+const { videogameHandler } = require("../handlers/videogameHandler");
 
 const videogamesModule = async () => {
   try {
@@ -58,4 +59,12 @@ const detailGameModule = async (id) => {
   }
 }
 
-module.exports = { videogamesModule, detailGameModule }
+const saveVideogameModule = async (videogame) => {
+  try {
+    return await videogameHandler(videogame);
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = { videogamesModule, detailGameModule, saveVideogameModule }
