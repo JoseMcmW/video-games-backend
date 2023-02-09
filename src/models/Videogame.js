@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
       },
       release: {
         type: DataTypes.DATEONLY,
-        defaultValue: DataTypes.DATENOW,
+        defaultValue: DataTypes.NOW,
         allowNull: false
       },
       image_background: {
