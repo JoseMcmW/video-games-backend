@@ -5,6 +5,7 @@ const {
 const {
   videogameHandler,
   deleteVideogameHandler,
+  updateVideogameHandler
 } = require("../handlers/videogameHandler");
 
 const videogamesModule = async () => {
@@ -81,9 +82,18 @@ const deleteVideogameModule = async (id) => {
   }
 };
 
+const updateVideogameModule = async (id, body) => {
+  try {
+    return await updateVideogameHandler(id, body);
+  } catch (error) {
+    throw(error)
+  }
+}
+
 module.exports = {
   videogamesModule,
   detailGameModule,
   saveVideogameModule,
   deleteVideogameModule,
+  updateVideogameModule
 };
