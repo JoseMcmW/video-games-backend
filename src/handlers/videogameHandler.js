@@ -20,7 +20,20 @@ const deleteVideogameHandler = async (id) => {
   }
 }
 
+const updateVideogameHandler = async (id, body) => {
+  try {
+    return await Videogame.update( body , {
+      where: {
+        id
+      }
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   videogameHandler,
-  deleteVideogameHandler
+  deleteVideogameHandler,
+  updateVideogameHandler
 };
