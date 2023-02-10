@@ -8,4 +8,19 @@ const videogameHandler = async (game) => {
   }
 };
 
-module.exports = { videogameHandler };
+const deleteVideogameHandler = async (id) => {
+  try {
+    return await Videogame.destroy({
+      where: {
+        id
+      }
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = {
+  videogameHandler,
+  deleteVideogameHandler
+};
