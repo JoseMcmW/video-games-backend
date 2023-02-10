@@ -3,6 +3,7 @@ const {
   videogamesModule,
   detailGameModule,
   saveVideogameModule,
+  deleteVideogameModule,
 } = require("../modules/videogamesModule");
 
 const videogamesController = async (req, res) => {
@@ -28,9 +29,19 @@ const saveVideogameController = async (req, res) => {
   try {
     const { body } = req;
     await saveVideogameModule(body);
-    res.status(200).send({ message: "Videogame saved success." });
+    res.status(200).send({ message: "Videogame saved successfully." });
   } catch (error) {
     res.status(error.status || 500).send({ error: error.message });
+  }
+};
+
+const deleteVideogameController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await deleteVideogameModule(id);
+    res.status(200).send({ message: "Videogame deleted successfully" });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
   }
 };
 
@@ -38,4 +49,5 @@ module.exports = {
   videogamesController,
   detailGameController,
   saveVideogameController,
+  deleteVideogameController,
 };
