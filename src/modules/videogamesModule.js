@@ -1,28 +1,47 @@
-const { videogamesService, detailGameService } = require("../services/videogamesService");
+const {
+  videogamesService,
+  detailGameService,
+} = require("../services/videogamesService");
+const {
+  videogameHandler,
+  detailGameHandler,
+  deleteVideogameHandler,
+  updateVideogameHandler
+} = require("../handlers/videogameHandler");
 
 const videogamesModule = async () => {
+  /*TODO:
+      - Agregarle al modelo los parámetros que hacen falta para hacerlo lo más similar a la data de la API.
+      - Dar formato a la data obtenida de la API y de la Base de datos. Debe ser igual, es decir, se debe homologar.
+      - Concatenar la data de la API y la base de datos.
+  */
   try {
     const videogames = await videogamesService();
-    const allVideogames = videogames.results.map(v => {
+    const allVideogames = videogames.results.map((v) => {
       return {
         id: v.id,
         name: v.name,
         image: v.background_image,
         rating: v.rating,
-        released: v.released
+        released: v.released,
       };
     });
     return allVideogames;
   } catch (error) {
     throw error;
   }
-}
+};
 
 const detailGameModule = async (id) => {
   try {
-    const detailGame = await detailGameService(id);
+    if (id.includes("-")) {
+      let detailGameFromDB = await detailGameHandler(id);
+      return detailGameFromDB;
+    }
 
-    const platforms = detailGame.platforms.map(p => {
+    let detailGame = await detailGameService(id);
+
+    const platforms = detailGame.platforms.map((p) => {
       return {
         id: p.platform.id,
         name: p.platform.name,
@@ -30,17 +49,17 @@ const detailGameModule = async (id) => {
         requirements: {
           minimum: p.requirements.minimum || "",
           recommended: p.requirements.recommended || "",
-        }
-      }
-    })
+        },
+      };
+    });
 
-    const ratings = detailGame.ratings.map(r => {
+    const ratings = detailGame.ratings.map((r) => {
       return {
         title: r.title,
         percent: r.percent,
         count: r.count,
-      }
-    })
+      };
+    });
 
     const detailGameFormatted = {
       id: detailGame.id,
@@ -51,11 +70,41 @@ const detailGameModule = async (id) => {
       released: detailGame.released,
       rating: detailGame.rating,
       ratings: ratings,
-    }
+    };
     return detailGameFormatted;
   } catch (error) {
     throw error;
   }
+};
+
+const saveVideogameModule = async (videogame) => {
+  try {
+    return await videogameHandler(videogame);
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteVideogameModule = async (id) => {
+  try {
+    return await deleteVideogameHandler(id);
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateVideogameModule = async (id, body) => {
+  try {
+    return await updateVideogameHandler(id, body);
+  } catch (error) {
+    throw(error)
+  }
 }
 
-module.exports = { videogamesModule, detailGameModule }
+module.exports = {
+  videogamesModule,
+  detailGameModule,
+  saveVideogameModule,
+  deleteVideogameModule,
+  updateVideogameModule,
+};
