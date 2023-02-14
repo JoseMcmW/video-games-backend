@@ -4,11 +4,16 @@ const {
 } = require("../services/videogamesService");
 const {
   videogameHandler,
+  detailGameHandler,
   deleteVideogameHandler,
-  updateVideogameHandler
 } = require("../handlers/videogameHandler");
 
 const videogamesModule = async () => {
+  /*TODO:
+      - Agregarle al modelo los parámetros que hacen falta para hacerlo lo más similar a la data de la API.
+      - Dar formato a la data obtenida de la API y de la Base de datos. Debe ser igual, es decir, se debe homologar.
+      - Concatenar la data de la API y la base de datos.
+  */
   try {
     const videogames = await videogamesService();
     const allVideogames = videogames.results.map((v) => {
@@ -28,7 +33,12 @@ const videogamesModule = async () => {
 
 const detailGameModule = async (id) => {
   try {
-    const detailGame = await detailGameService(id);
+    if (id.includes("-")) {
+      let detailGameFromDB = await detailGameHandler(id);
+      return detailGameFromDB;
+    }
+
+    let detailGame = await detailGameService(id);
 
     const platforms = detailGame.platforms.map((p) => {
       return {
@@ -82,18 +92,9 @@ const deleteVideogameModule = async (id) => {
   }
 };
 
-const updateVideogameModule = async (id, body) => {
-  try {
-    return await updateVideogameHandler(id, body);
-  } catch (error) {
-    throw(error)
-  }
-}
-
 module.exports = {
   videogamesModule,
   detailGameModule,
   saveVideogameModule,
   deleteVideogameModule,
-  updateVideogameModule
 };

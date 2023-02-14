@@ -20,12 +20,16 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.NOW,
         allowNull: false
       },
-      image_background: {
+      image: {
         type: DataTypes.STRING,
         allowNull: false
       },
       platforms: {
-        type: DataTypes.ARRAY(DataTypes.STRING)
+        type: DataTypes.ARRAY(DataTypes.JSONB)
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false
       },
       rating: {
         type: DataTypes.FLOAT,
@@ -33,6 +37,9 @@ module.exports = (sequelize) => {
           min: 0,
           max: 5
         }
+      },
+      ratings: {
+        type : DataTypes.ARRAY(DataTypes.JSONB)
       }
     });
 };
