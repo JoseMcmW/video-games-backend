@@ -20,13 +20,9 @@ const deleteVideogameHandler = async (id) => {
   }
 }
 
-const updateVideogameHandler = async (id, body) => {
+const detailGameHandler = async (id) => {
   try {
-    return await Videogame.update( body , {
-      where: {
-        id
-      }
-    });
+    return await Videogame.findOne({ where: { id } });
   } catch (error) {
     throw error;
   }
@@ -34,6 +30,6 @@ const updateVideogameHandler = async (id, body) => {
 
 module.exports = {
   videogameHandler,
-  deleteVideogameHandler,
-  updateVideogameHandler
+  detailGameHandler,
+  deleteVideogameHandler
 };
