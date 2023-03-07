@@ -8,6 +8,14 @@ const videogameHandler = async (game) => {
   }
 };
 
+const videogamesDB = async() => {
+  try {
+    return await Videogame.findAll();
+  } catch (error) {
+    throw error;
+  }
+}
+
 const deleteVideogameHandler = async (id) => {
   try {
     return await Videogame.destroy({
@@ -35,5 +43,6 @@ const updateVideogameHandler = async (id, body) => {
 module.exports = {
   videogameHandler,
   updateVideogameHandler,
-  deleteVideogameHandler
+  deleteVideogameHandler,
+  videogamesDB
 };

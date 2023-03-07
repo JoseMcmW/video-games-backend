@@ -8,8 +8,9 @@ const {
 } = require("../modules/videogamesModule");
 
 const videogamesController = async (req, res) => {
+  const { name } = req.query;
   try {
-    const videogames = await videogamesModule();
+    const videogames = await videogamesModule(name);
     res.status(200).send(videogames);
   } catch (error) {
     res.status(error.status || 500).send({ error: error.message });
