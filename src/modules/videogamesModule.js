@@ -7,7 +7,7 @@ const {
   detailGameHandler,
   deleteVideogameHandler,
   updateVideogameHandler,
-  videogamesDB
+  videogamesDB,
 } = require("../handlers/videogameHandler");
 
 const videogamesModule = async (name) => {
@@ -15,7 +15,7 @@ const videogamesModule = async (name) => {
     const videogamesFromDB = await videogamesDB();
     let videogames = await videogamesService();
     videogames = videogames.results;
-    const concatVideogames = videogames.concat(videogamesFromDB)
+    const concatVideogames = videogames.concat(videogamesFromDB);
     const allVideogames = concatVideogames.map((v) => {
       return {
         id: v.id,
@@ -25,9 +25,10 @@ const videogamesModule = async (name) => {
         released: v.released,
       };
     });
-    if(name) {
-      const searchVideogame = allVideogames.filter(n => {
-      return n.name.includes(name)})
+    if (name) {
+      const searchVideogame = allVideogames.filter((n) => {
+        return n.name.includes(name);
+      });
       return searchVideogame;
     }
     return allVideogames;
@@ -101,9 +102,9 @@ const updateVideogameModule = async (id, body) => {
   try {
     return await updateVideogameHandler(id, body);
   } catch (error) {
-    throw(error)
+    throw error;
   }
-}
+};
 
 module.exports = {
   videogamesModule,
