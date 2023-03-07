@@ -26,9 +26,7 @@ const videogamesModule = async (name) => {
       };
     });
     if (name) {
-      const searchVideogame = allVideogames.filter((n) => {
-        return n.name.includes(name);
-      });
+      const searchVideogame = allVideogames.filter(n => n.name.toLowerCase().includes(name) || n.name.toUpperCase().includes(name));
       return searchVideogame;
     }
     return allVideogames;
