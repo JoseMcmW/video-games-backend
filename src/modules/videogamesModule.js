@@ -67,7 +67,7 @@ const detailGameModule = async (id) => {
     const detailGameFormatted = {
       id: detailGame.id,
       name: detailGame.name,
-      description: detailGame.description,
+      description: detailGame.description.replace( /(<([^>]+)>)/ig, ''),
       image: detailGame.background_image,
       platforms: platforms,
       released: detailGame.released,
