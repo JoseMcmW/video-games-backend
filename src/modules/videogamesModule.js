@@ -26,9 +26,7 @@ const videogamesModule = async (name) => {
       };
     });
     if (name) {
-      const searchVideogame = allVideogames.filter((n) => {
-        return n.name.includes(name);
-      });
+      const searchVideogame = allVideogames.filter(n => n.name.toLowerCase().includes(name) || n.name.toUpperCase().includes(name));
       return searchVideogame;
     }
     return allVideogames;
@@ -69,7 +67,7 @@ const detailGameModule = async (id) => {
     const detailGameFormatted = {
       id: detailGame.id,
       name: detailGame.name,
-      description: detailGame.description,
+      description: detailGame.description.replace( /(<([^>]+)>)/ig, ''),
       image: detailGame.background_image,
       platforms: platforms,
       released: detailGame.released,
