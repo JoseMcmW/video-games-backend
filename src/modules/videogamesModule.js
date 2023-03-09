@@ -14,7 +14,6 @@ const videogamesModule = async (name) => {
   try {
     const videogamesFromDB = await videogamesDB();
     let videogames = await videogamesService();
-    videogames = videogames.results;
     const concatVideogames = videogames.concat(videogamesFromDB);
     const allVideogames = concatVideogames.map((v) => {
       return {
